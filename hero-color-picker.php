@@ -1,12 +1,12 @@
 <?php
 /**
  * Plugin Name:   Hero Color Picker
- * Plugin URI:    https://toensing.com
+ * Plugin URI:    https://github.com/mtoensing/hero-color-picker
  * Description:   Adds a per-post color picker in the editor sidebar for hero styling.
- * Version:       1.0.2
+ * Version:       1.0.3
  * Author:        Marc Tönsing
  * Author URI:    https://toensing.com
- * Text Domain:   simpletoc
+ * Text Domain:   hero-color-picker
  * License: GPL   v2 or later
  * License URI:   http://www.gnu.org/licenses/gpl-2.0.html
  *
@@ -61,5 +61,8 @@ add_action('wp_head', function () {
 	$color = sanitize_hex_color($color);
 	if (!$color) return;
 
-	echo "<style>.hero-colored {background-color: $color;}</style>\n";
+	printf(
+		'<style>.hero-colored {background-color: %s;}</style>' . "\n",
+		esc_html($color)
+	);
 });
