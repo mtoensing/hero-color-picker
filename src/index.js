@@ -1,5 +1,6 @@
 import { registerPlugin } from '@wordpress/plugins';
 import { PluginDocumentSettingPanel } from '@wordpress/editor';
+import { __ } from '@wordpress/i18n';
 import { ColorPicker, PanelRow } from '@wordpress/components';
 import { useSelect, useDispatch } from '@wordpress/data';
 
@@ -23,7 +24,7 @@ function HeroColorPickerPanel() {
 		>
 			<PanelRow>
 				<div style={{ width: '100%' }}>
-					<div style={{ marginBottom: 8 }}>Hero-Farbe</div>
+					<div style={{ marginBottom: 8 }}>{ __( 'Hero Color Picker', 'hero-color-picker' ) }</div>
 
 					<ColorPicker
 						color={value || '#111111'}
@@ -34,7 +35,7 @@ function HeroColorPickerPanel() {
 					/>
 
 					<div style={{ marginTop: 8, fontFamily: 'monospace' }}>
-						{value || '(nicht gesetzt)'}
+						{value ||  __( 'No color selected', 'hero-color-picker' ) }
 					</div>
 				</div>
 			</PanelRow>

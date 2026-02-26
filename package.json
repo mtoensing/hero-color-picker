@@ -8,6 +8,7 @@
     "build": "wp-scripts build",
     "start": "wp-scripts start",
     "clean": "rm -rf build",
+    "plugin-zip": "wp-scripts plugin-zip",
     "dist": "npm run clean && npm run build",
     "lint:js": "wp-scripts lint-js",
     "lint:js:fix": "wp-scripts lint-js --fix"
