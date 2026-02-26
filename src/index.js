@@ -1,7 +1,7 @@
 import { registerPlugin } from '@wordpress/plugins';
 import { PluginDocumentSettingPanel } from '@wordpress/editor';
 import { __ } from '@wordpress/i18n';
-import { ColorPicker, PanelRow } from '@wordpress/components';
+import { Button, ColorPicker, PanelRow } from '@wordpress/components';
 import { useSelect, useDispatch } from '@wordpress/data';
 
 const META_KEY = 'hero_color_picker_hero_color';
@@ -24,8 +24,6 @@ function HeroColorPickerPanel() {
 		>
 			<PanelRow>
 				<div style={{ width: '100%' }}>
-					<div style={{ marginBottom: 8 }}>{ __( 'Hero Color Picker', 'hero-color-picker' ) }</div>
-
 					<ColorPicker
 						color={value || '#111111'}
 						enableAlpha={false}
@@ -33,6 +31,17 @@ function HeroColorPickerPanel() {
 							editPost({ meta: { ...meta, [META_KEY]: newColor } });
 						}}
 					/>
+
+					<Button
+						variant="secondary"
+						onClick={() => {
+							editPost({ meta: { ...meta, [META_KEY]: '' } });
+						}}
+						disabled={!value}
+						style={{ marginTop: 8 }}
+					>
+						{ __( 'Unset color', 'hero-color-picker' ) }
+					</Button>
 
 					<div style={{ marginTop: 8, fontFamily: 'monospace' }}>
 						{value ||  __( 'No color selected', 'hero-color-picker' ) }
