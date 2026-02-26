@@ -35,7 +35,7 @@ jobs:
         run: npx wp-scripts lint-js
 
       - name: Lint CSS
-        run: npx wp-scripts lint-style
+        run: npx wp-scripts lint-style --allow-empty-input
 
       - name: Build
         run: npx wp-scripts build
