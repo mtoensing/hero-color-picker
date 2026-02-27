@@ -7,13 +7,23 @@ import { useSelect, useDispatch } from '@wordpress/data';
 const META_KEY = 'hero_color_picker_hero_color';
 
 function HeroColorPickerPanel() {
-	const meta = useSelect(
-		( select ) =>
-			select( 'core/editor' ).getEditedPostAttribute( 'meta' ) || {},
+	const { meta, postType } = useSelect(
+		( select ) => {
+			const editor = select( 'core/editor' );
+
+			return {
+				meta: editor.getEditedPostAttribute( 'meta' ) || {},
+				postType: editor.getCurrentPostType(),
+			};
+		},
 		[]
 	);
 
 	const { editPost } = useDispatch( 'core/editor' );
+
+	if ( postType !== 'post' ) {
+		return null;
+	}
 
 	const value = meta[ META_KEY ] || '';
 
