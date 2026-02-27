@@ -37,19 +37,15 @@ function HeroColorPickerPanel() {
 
 					<Button
 						variant="secondary"
+						isDestructive
 						onClick={ () => {
 							editPost( { meta: { ...meta, [ META_KEY ]: '' } } );
 						} }
 						disabled={ ! value }
-						style={ { marginTop: 8 } }
+						style={ { marginTop: 8, marginLeft: 16 } }
 					>
 						{ __( 'Unset color', 'hero-color-picker' ) }
 					</Button>
-
-					<div style={ { marginTop: 8, fontFamily: 'monospace' } }>
-						{ value ||
-							__( 'No color selected', 'hero-color-picker' ) }
-					</div>
 				</div>
 			</PanelRow>
 		</PluginDocumentSettingPanel>
