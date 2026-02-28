@@ -4,7 +4,8 @@ import { __ } from '@wordpress/i18n';
 import { Button, ColorPicker, PanelRow } from '@wordpress/components';
 import { useSelect, useDispatch } from '@wordpress/data';
 
-const META_KEY = 'hero_color_picker_hero_color';
+const BACKGROUND_META_KEY = 'hero_color_picker_hero_color';
+const FONT_META_KEY = 'hero_color_picker_font_color';
 
 function HeroColorPickerPanel() {
 	const { meta, postType } = useSelect( ( select ) => {
@@ -22,7 +23,8 @@ function HeroColorPickerPanel() {
 		return null;
 	}
 
-	const value = meta[ META_KEY ] || '';
+	const backgroundValue = meta[ BACKGROUND_META_KEY ] || '';
+	const fontValue = meta[ FONT_META_KEY ] || '';
 
 	return (
 		<PluginDocumentSettingPanel
@@ -36,11 +38,11 @@ function HeroColorPickerPanel() {
 						{ __( 'Background Color', 'hero-color-picker' ) }
 					</div>
 					<ColorPicker
-						color={ value || '#111111' }
+						color={ backgroundValue || '#111111' }
 						enableAlpha={ false }
 						onChange={ ( newColor ) => {
 							editPost( {
-								meta: { ...meta, [ META_KEY ]: newColor },
+								meta: { ...meta, [ BACKGROUND_META_KEY ]: newColor },
 							} );
 						} }
 					/>
@@ -49,12 +51,39 @@ function HeroColorPickerPanel() {
 						variant="secondary"
 						isDestructive
 						onClick={ () => {
-							editPost( { meta: { ...meta, [ META_KEY ]: '' } } );
+							editPost( {
+								meta: { ...meta, [ BACKGROUND_META_KEY ]: '' },
+							} );
 						} }
-						disabled={ ! value }
+						disabled={ ! backgroundValue }
 						style={ { marginTop: 8, marginLeft: 16 } }
 					>
-						{ __( 'Unset color', 'hero-color-picker' ) }
+						{ __( 'Unset background color', 'hero-color-picker' ) }
+					</Button>
+
+					<div style={ { marginTop: 16, marginBottom: 8 } }>
+						{ __( 'Font Color', 'hero-color-picker' ) }
+					</div>
+					<ColorPicker
+						color={ fontValue || '#111111' }
+						enableAlpha={ false }
+						onChange={ ( newColor ) => {
+							editPost( {
+								meta: { ...meta, [ FONT_META_KEY ]: newColor },
+							} );
+						} }
+					/>
+
+					<Button
+						variant="secondary"
+						isDestructive
+						onClick={ () => {
+							editPost( { meta: { ...meta, [ FONT_META_KEY ]: '' } } );
+						} }
+						disabled={ ! fontValue }
+						style={ { marginTop: 8, marginLeft: 16 } }
+					>
+						{ __( 'Unset font color', 'hero-color-picker' ) }
 					</Button>
 				</div>
 			</PanelRow>

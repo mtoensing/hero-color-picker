@@ -14,9 +14,11 @@ WordPress plugin for the block editor (Gutenberg) to set a hero color per post.
 == Description ==
 
 - Sidebar panel in the editor: **Hero Color Picker**
-- Color is stored as post meta: `hero_color_picker_hero_color`
-- A CSS is output on the frontend:
-  - `.hero-colored {background-color: $color;}`
+- Colors are stored as post meta:
+  - `hero_color_picker_hero_color`
+  - `hero_color_picker_font_color`
+- CSS is output on the frontend:
+  - `.hero-colored {background-color: $background; color: $font;}`
 
 == Installation ==
 
