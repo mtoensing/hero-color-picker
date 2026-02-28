@@ -32,6 +32,9 @@ function HeroColorPickerPanel() {
 		>
 			<PanelRow>
 				<div style={ { width: '100%' } }>
+					<div style={ { marginBottom: 8 } }>
+						{ __( 'Background Color', 'hero-color-picker' ) }
+					</div>
 					<ColorPicker
 						color={ value || '#111111' }
 						enableAlpha={ false }
