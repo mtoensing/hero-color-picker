@@ -1,6 +1,6 @@
 === Hero Color Picker ===
 Contributors: MarcDK
-Tags: TOC, Table of Contents, Block, Accessibility, Table
+Tags: Gutenberg, Block Editor, Color Picker, Accessibility, WCAG
 Requires at least: 5.9
 Tested up to: 6.9
 Stable tag: 1.0.5
@@ -13,12 +13,14 @@ WordPress plugin for the block editor (Gutenberg) to set a hero color per post.
 
 == Description ==
 
-- Sidebar panel in the editor: **Hero Color Picker**
-- Colors are stored as post meta:
+Sidebar panel in the editor: **Hero Color Picker**. The colors are stored as post meta:
   - `hero_color_picker_hero_color`
   - `hero_color_picker_font_color`
-- CSS is output on the frontend:
-  - `.hero-colored {background-color: $background; color: $font;}`
+CSS is output on the frontend:
+    `.hero-colored {
+    background-color: $background; 
+    color: $font;
+    }`
 
 == Installation ==
 

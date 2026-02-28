@@ -219,6 +219,27 @@ function HeroColorPickerPanel() {
 								? __( 'PASS', 'hero-color-picker' )
 								: __( 'FAILED', 'hero-color-picker' ) }
 						</div>
+
+						<div
+							style={ {
+								marginTop: 10,
+								padding: 10,
+								borderRadius: 4,
+								border: '1px solid #dcdcde',
+								backgroundColor: backgroundValue || '#f0f0f1',
+								color: fontValue || '#1e1e1e',
+							} }
+						>
+							<div style={ { fontWeight: 600, marginBottom: 4 } }>
+								{ __( 'Preview', 'hero-color-picker' ) }
+							</div>
+							<div>
+								{ __(
+									'This is how background and font color look together.',
+									'hero-color-picker'
+								) }
+							</div>
+						</div>
 					</div>
 				</div>
 			</PanelRow>
