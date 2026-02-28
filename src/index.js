@@ -6,6 +6,62 @@ import { useSelect, useDispatch } from '@wordpress/data';
 
 const BACKGROUND_META_KEY = 'hero_color_picker_hero_color';
 const FONT_META_KEY = 'hero_color_picker_font_color';
+const AAA_NORMAL_TEXT_MIN_CONTRAST = 7;
+
+function hexToRgb( hexColor ) {
+	if ( typeof hexColor !== 'string' ) {
+		return null;
+	}
+
+	const rawHex = hexColor.trim().replace( '#', '' );
+	const expandedHex =
+		rawHex.length === 3
+			? rawHex
+					.split( '' )
+					.map( ( char ) => char + char )
+					.join( '' )
+			: rawHex;
+
+	if ( ! /^[0-9a-fA-F]{6}$/.test( expandedHex ) ) {
+		return null;
+	}
+
+	return {
+		r: parseInt( expandedHex.slice( 0, 2 ), 16 ),
+		g: parseInt( expandedHex.slice( 2, 4 ), 16 ),
+		b: parseInt( expandedHex.slice( 4, 6 ), 16 ),
+	};
+}
+
+function channelToLinear( channel ) {
+	const srgb = channel / 255;
+
+	return srgb <= 0.03928 ? srgb / 12.92 : ( ( srgb + 0.055 ) / 1.055 ) ** 2.4;
+}
+
+function getRelativeLuminance( color ) {
+	return (
+		0.2126 * channelToLinear( color.r ) +
+		0.7152 * channelToLinear( color.g ) +
+		0.0722 * channelToLinear( color.b )
+	);
+}
+
+function getContrastRatio( foregroundHex, backgroundHex ) {
+	const foregroundColor = hexToRgb( foregroundHex );
+	const backgroundColor = hexToRgb( backgroundHex );
+
+	if ( ! foregroundColor || ! backgroundColor ) {
+		return null;
+	}
+
+	const foregroundLuminance = getRelativeLuminance( foregroundColor );
+	const backgroundLuminance = getRelativeLuminance( backgroundColor );
+	const lighter = Math.max( foregroundLuminance, backgroundLuminance );
+	const darker = Math.min( foregroundLuminance, backgroundLuminance );
+
+	return ( lighter + 0.05 ) / ( darker + 0.05 );
+}
 
 function OnDemandColorControl( { label, value, onChange, onReset, resetText } ) {
 	return (
@@ -83,6 +139,9 @@ function HeroColorPickerPanel() {
 
 	const backgroundValue = meta[ BACKGROUND_META_KEY ] || '';
 	const fontValue = meta[ FONT_META_KEY ] || '';
+	const contrastRatio = getContrastRatio( fontValue, backgroundValue );
+	const aaaPass =
+		contrastRatio !== null && contrastRatio >= AAA_NORMAL_TEXT_MIN_CONTRAST;
 
 	return (
 		<PluginDocumentSettingPanel
@@ -121,6 +180,28 @@ function HeroColorPickerPanel() {
 						} }
 						resetText={ __( 'Unset', 'hero-color-picker' ) }
 					/>
+
+					<div
+						style={ {
+							marginTop: 8,
+							paddingTop: 8,
+							borderTop: '1px solid #ddd',
+						} }
+					>
+						<div style={ { marginBottom: 4 } }>
+							{ __( 'WCAG AAA Normal Text', 'hero-color-picker' ) }
+						</div>
+						<div
+							style={ {
+								fontWeight: 600,
+								color: aaaPass ? '#0a7d23' : '#b32d2e',
+							} }
+						>
+							{ aaaPass
+								? __( 'PASS', 'hero-color-picker' )
+								: __( 'FAILED', 'hero-color-picker' ) }
+						</div>
+					</div>
 				</div>
 			</PanelRow>
 		</PluginDocumentSettingPanel>
