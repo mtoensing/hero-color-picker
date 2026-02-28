@@ -63,7 +63,13 @@ function getContrastRatio( foregroundHex, backgroundHex ) {
 	return ( lighter + 0.05 ) / ( darker + 0.05 );
 }
 
-function OnDemandColorControl( { label, value, onChange, onReset, resetText } ) {
+function OnDemandColorControl( {
+	label,
+	value,
+	onChange,
+	onReset,
+	resetText,
+} ) {
 	return (
 		<div style={ { marginBottom: 16 } }>
 			<div style={ { marginBottom: 8 } }>{ label }</div>
@@ -84,11 +90,15 @@ function OnDemandColorControl( { label, value, onChange, onReset, resetText } ) 
 								alignItems: 'center',
 							} }
 						>
-							<span>{ value || __( 'Select color', 'hero-color-picker' ) }</span>
+							<span>
+								{ value ||
+									__( 'Select color', 'hero-color-picker' ) }
+							</span>
 							<span
 								aria-hidden
 								style={ {
 									display: 'inline-block',
+									marginLeft: 8,
 									width: 14,
 									height: 14,
 									borderRadius: 2,
@@ -156,7 +166,10 @@ function HeroColorPickerPanel() {
 						value={ backgroundValue }
 						onChange={ ( newColor ) => {
 							editPost( {
-								meta: { ...meta, [ BACKGROUND_META_KEY ]: newColor },
+								meta: {
+									...meta,
+									[ BACKGROUND_META_KEY ]: newColor,
+								},
 							} );
 						} }
 						onReset={ () => {
@@ -176,7 +189,9 @@ function HeroColorPickerPanel() {
 							} );
 						} }
 						onReset={ () => {
-							editPost( { meta: { ...meta, [ FONT_META_KEY ]: '' } } );
+							editPost( {
+								meta: { ...meta, [ FONT_META_KEY ]: '' },
+							} );
 						} }
 						resetText={ __( 'Unset', 'hero-color-picker' ) }
 					/>
@@ -189,7 +204,10 @@ function HeroColorPickerPanel() {
 						} }
 					>
 						<div style={ { marginBottom: 4 } }>
-							{ __( 'WCAG AAA Normal Text', 'hero-color-picker' ) }
+							{ __(
+								'WCAG AAA Normal Text',
+								'hero-color-picker'
+							) }
 						</div>
 						<div
 							style={ {
