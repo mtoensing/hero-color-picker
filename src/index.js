@@ -205,7 +205,7 @@ function HeroColorPickerPanel() {
 					>
 						<div style={ { marginBottom: 4 } }>
 							{ __(
-								'WCAG AAA Normal Text',
+								'WCAG AAA Normal Text Contrast Ratio',
 								'hero-color-picker'
 							) }
 						</div>
