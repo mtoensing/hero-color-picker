@@ -150,8 +150,23 @@ function HeroColorPickerPanel() {
 	const backgroundValue = meta[ BACKGROUND_META_KEY ] || '';
 	const fontValue = meta[ FONT_META_KEY ] || '';
 	const contrastRatio = getContrastRatio( fontValue, backgroundValue );
+	const hasBothColors = Boolean( backgroundValue && fontValue );
 	const aaaPass =
-		contrastRatio !== null && contrastRatio >= AAA_NORMAL_TEXT_MIN_CONTRAST;
+		hasBothColors &&
+		contrastRatio !== null &&
+		contrastRatio >= AAA_NORMAL_TEXT_MIN_CONTRAST;
+	let statusColor = '#50575e';
+	let statusText = __( 'Not applicable', 'hero-color-picker' );
+
+	if ( hasBothColors ) {
+		if ( aaaPass ) {
+			statusColor = '#0a7d23';
+			statusText = __( 'PASS', 'hero-color-picker' );
+		} else {
+			statusColor = '#b32d2e';
+			statusText = __( 'FAILED', 'hero-color-picker' );
+		}
+	}
 
 	return (
 		<PluginDocumentSettingPanel
@@ -212,12 +227,10 @@ function HeroColorPickerPanel() {
 						<div
 							style={ {
 								fontWeight: 600,
-								color: aaaPass ? '#0a7d23' : '#b32d2e',
+								color: statusColor,
 							} }
 						>
-							{ aaaPass
-								? __( 'PASS', 'hero-color-picker' )
-								: __( 'FAILED', 'hero-color-picker' ) }
+							{ statusText }
 						</div>
 
 						<div
