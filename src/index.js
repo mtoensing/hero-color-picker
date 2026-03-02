@@ -14,6 +14,33 @@ import { useSelect, useDispatch } from '@wordpress/data';
 const BACKGROUND_META_KEY = 'hero_color_picker_hero_color';
 const FONT_META_KEY = 'hero_color_picker_font_color';
 const AAA_NORMAL_TEXT_MIN_CONTRAST = 7;
+const { useEffect } = window.wp.element;
+
+function applyEditorPostSummaryColors( backgroundColor, textColor ) {
+	if ( typeof document === 'undefined' ) {
+		return;
+	}
+
+	const summaryElements = document.querySelectorAll( '.editor-post-summary' );
+
+	summaryElements.forEach( ( summaryElement ) => {
+		if ( backgroundColor ) {
+			summaryElement.style.setProperty(
+				'background-color',
+				backgroundColor,
+				'important'
+			);
+		} else {
+			summaryElement.style.removeProperty( 'background-color' );
+		}
+
+		if ( textColor ) {
+			summaryElement.style.setProperty( 'color', textColor, 'important' );
+		} else {
+			summaryElement.style.removeProperty( 'color' );
+		}
+	} );
+}
 
 function hexToRgb( hexColor ) {
 	if ( typeof hexColor !== 'string' ) {
@@ -150,10 +177,6 @@ function HeroColorPickerPanel() {
 
 	const { editPost } = useDispatch( 'core/editor' );
 
-	if ( postType !== 'post' ) {
-		return null;
-	}
-
 	const backgroundValue = meta[ BACKGROUND_META_KEY ] || '';
 	const fontValue = meta[ FONT_META_KEY ] || '';
 	const contrastRatio = getContrastRatio( fontValue, backgroundValue );
@@ -173,6 +196,25 @@ function HeroColorPickerPanel() {
 			statusText = __( 'FAILED', 'hero-color-picker' );
 			statusType = 'error';
 		}
+	}
+
+	useEffect( () => {
+		if ( postType !== 'post' ) {
+			applyEditorPostSummaryColors( '', '' );
+			return;
+		}
+
+		applyEditorPostSummaryColors( backgroundValue, fontValue );
+	}, [ backgroundValue, fontValue, postType ] );
+
+	useEffect( () => {
+		return () => {
+			applyEditorPostSummaryColors( '', '' );
+		};
+	}, [] );
+
+	if ( postType !== 'post' ) {
+		return null;
 	}
 
 	return (
