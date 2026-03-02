@@ -1,7 +1,14 @@
 import { registerPlugin } from '@wordpress/plugins';
 import { PluginDocumentSettingPanel } from '@wordpress/editor';
 import { __ } from '@wordpress/i18n';
-import { Button, ColorPicker, Dropdown, PanelRow } from '@wordpress/components';
+import {
+	BaseControl,
+	Button,
+	ColorPicker,
+	Dropdown,
+	Notice,
+	PanelRow,
+} from '@wordpress/components';
 import { useSelect, useDispatch } from '@wordpress/data';
 
 const BACKGROUND_META_KEY = 'hero_color_picker_hero_color';
@@ -155,16 +162,16 @@ function HeroColorPickerPanel() {
 		hasBothColors &&
 		contrastRatio !== null &&
 		contrastRatio >= AAA_NORMAL_TEXT_MIN_CONTRAST;
-	let statusColor = '#50575e';
 	let statusText = __( 'Not applicable', 'hero-color-picker' );
+	let statusType = 'info';
 
 	if ( hasBothColors ) {
 		if ( aaaPass ) {
-			statusColor = '#0a7d23';
 			statusText = __( 'PASS', 'hero-color-picker' );
+			statusType = 'success';
 		} else {
-			statusColor = '#b32d2e';
 			statusText = __( 'FAILED', 'hero-color-picker' );
+			statusType = 'error';
 		}
 	}
 
@@ -213,47 +220,46 @@ function HeroColorPickerPanel() {
 
 					<div
 						style={ {
-							marginTop: 8,
-							paddingTop: 8,
-							borderTop: '1px solid #ddd',
+							padding: 10,
+							borderRadius: 4,
+							border: '1px solid #dcdcde',
+							backgroundColor: backgroundValue || '#f0f0f1',
+							color: fontValue || '#1e1e1e',
+							marginBottom: 10,
 						} }
 					>
-						<div style={ { marginBottom: 4 } }>
+						<strong>
+							{ __( 'Preview', 'hero-color-picker' ) }
+						</strong>
+						<p style={ { margin: '6px 0 0' } }>
 							{ __(
-								'WCAG AAA Normal Text Contrast Ratio',
+								'This is how background and font color look together.',
 								'hero-color-picker'
 							) }
-						</div>
-						<div
-							style={ {
-								fontWeight: 600,
-								color: statusColor,
-							} }
-						>
-							{ statusText }
-						</div>
-
-						<div
-							style={ {
-								marginTop: 10,
-								padding: 10,
-								borderRadius: 4,
-								border: '1px solid #dcdcde',
-								backgroundColor: backgroundValue || '#f0f0f1',
-								color: fontValue || '#1e1e1e',
-							} }
-						>
-							<div style={ { fontWeight: 600, marginBottom: 4 } }>
-								{ __( 'Preview', 'hero-color-picker' ) }
-							</div>
-							<div>
-								{ __(
-									'This is how background and font color look together.',
-									'hero-color-picker'
-								) }
-							</div>
-						</div>
+						</p>
 					</div>
+
+					<BaseControl
+						id="hero-color-picker-contrast-check"
+						label={ __( 'Contrast Check', 'hero-color-picker' ) }
+					>
+						<Notice
+							status={ statusType }
+							isDismissible={ false }
+							style={ { margin: '6px 0 0' } }
+						>
+							<strong>{ statusText }</strong>
+							{ contrastRatio !== null
+								? ` (${ contrastRatio.toFixed( 2 ) }:1)`
+								: '' }
+						</Notice>
+						<p style={ { margin: '10px 0 0', color: '#50575e' } }>
+							{ __(
+								'WCAG AAA, normal text, minimum ratio 7:1.',
+								'hero-color-picker'
+							) }
+						</p>
+					</BaseControl>
 				</div>
 			</PanelRow>
 		</PluginDocumentSettingPanel>
