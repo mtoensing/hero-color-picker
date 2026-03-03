@@ -3,7 +3,7 @@ Contributors: MarcDK
 Tags: Gutenberg, Block Editor, Color Picker, Accessibility, WCAG
 Requires at least: 5.9
 Tested up to: 6.9
-Stable tag: 1.0.6
+Stable tag: 1.0.7
 Requires PHP: 7.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -19,8 +19,11 @@ Features:
 - Two color controls: `Background Color` and `Font Color`
 - On-demand color pickers in compact dropdown popovers
 - Live preview of both colors together directly in the sidebar
+- Applies selected colors to the editor post summary area for a closer backend preview
+- Removes the featured image preview outline while a custom background color is active
 - Accessibility check for `WCAG AAA Normal Text` with `PASS` / `FAILED` status
 - Panel is shown only while editing posts (`post`), not in template editing contexts
+- Adds a core-like posts list view `Hero Background` to show only posts with a custom hero background color
 - Works on elements that have the CSS class `hero-colored`
 
 Stored as post meta:
@@ -47,8 +50,14 @@ Important template setup:
 2. Activate the plugin in WordPress.
 3. Open `Appearance > Editor` and edit your post template (for example `Single`).
 4. Select the target `Group` block and add the class `hero-colored` in `Additional CSS class(es)`.
+5. Optional: open `Posts > All Posts` and click `Hero Background` to list posts with a custom hero background.
 
 == Changelog ==
+
+= 1.0.7 =
+* Added `Hero Background` view on `Posts > All Posts` to list posts with a custom hero background color.
+* Editor preview now removes the featured image outline while a custom background color is active.
+* Expanded documentation with newly added backend/editor features.
 
 = 1.0.6 =
 * Improved and expanded `Description` and `Installation` documentation.

@@ -42,6 +42,28 @@ function applyEditorPostSummaryColors( backgroundColor, textColor ) {
 	} );
 }
 
+function applyEditorFeaturedImageOutlineOverride( backgroundColor ) {
+	if ( typeof document === 'undefined' ) {
+		return;
+	}
+
+	const featuredImagePreviewElements = document.querySelectorAll(
+		'.editor-post-featured-image__preview'
+	);
+
+	featuredImagePreviewElements.forEach( ( featuredImagePreviewElement ) => {
+		if ( backgroundColor ) {
+			featuredImagePreviewElement.style.setProperty(
+				'outline',
+				'none',
+				'important'
+			);
+		} else {
+			featuredImagePreviewElement.style.removeProperty( 'outline' );
+		}
+	} );
+}
+
 function hexToRgb( hexColor ) {
 	if ( typeof hexColor !== 'string' ) {
 		return null;
@@ -201,15 +223,18 @@ function HeroColorPickerPanel() {
 	useEffect( () => {
 		if ( postType !== 'post' ) {
 			applyEditorPostSummaryColors( '', '' );
+			applyEditorFeaturedImageOutlineOverride( '' );
 			return;
 		}
 
 		applyEditorPostSummaryColors( backgroundValue, fontValue );
+		applyEditorFeaturedImageOutlineOverride( backgroundValue );
 	}, [ backgroundValue, fontValue, postType ] );
 
 	useEffect( () => {
 		return () => {
 			applyEditorPostSummaryColors( '', '' );
+			applyEditorFeaturedImageOutlineOverride( '' );
 		};
 	}, [] );
 

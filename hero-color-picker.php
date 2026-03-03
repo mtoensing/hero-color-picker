@@ -3,7 +3,7 @@
  * Plugin Name:   Hero Color Picker
  * Plugin URI:    https://github.com/mtoensing/hero-color-picker
  * Description:   Adds a per-post color picker in the editor sidebar for hero styling.
- * Version:       1.0.6
+ * Version:       1.0.7
  * Author:        Marc Tönsing
  * Author URI:    https://toensing.com
  * Text Domain:   hero-color-picker
@@ -19,6 +19,86 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 const HERO_COLOR_PICKER_META_KEY = 'hero_color_picker_hero_color';
 const HERO_COLOR_PICKER_FONT_META_KEY = 'hero_color_picker_font_color';
+const HERO_COLOR_PICKER_HAS_BG_QUERY_VAR = 'hero_color_picker_has_bg';
+
+/**
+ * Posts list: add a core-like view to show posts that have a hero background.
+ */
+add_filter(
+	'views_edit-post',
+	function ( $views ) {
+		$has_bg_filter = isset( $_GET[ HERO_COLOR_PICKER_HAS_BG_QUERY_VAR ] ) ? sanitize_text_field( wp_unslash( $_GET[ HERO_COLOR_PICKER_HAS_BG_QUERY_VAR ] ) ) : '';
+		$is_current    = ( '1' === $has_bg_filter );
+
+		$count_query = new WP_Query(
+			array(
+				'post_type'              => 'post',
+				'post_status'            => array( 'publish', 'future', 'draft', 'pending', 'private' ),
+				'fields'                 => 'ids',
+				'posts_per_page'         => 1,
+				'update_post_meta_cache' => false,
+				'update_post_term_cache' => false,
+				'cache_results'          => false,
+				'meta_query'             => array(
+					array(
+						'key'     => HERO_COLOR_PICKER_META_KEY,
+						'value'   => '',
+						'compare' => '!=',
+					),
+				),
+			)
+		);
+
+		$views['hero_color_picker_has_bg'] = sprintf(
+			'<a href="%1$s"%2$s>%3$s <span class="count">(%4$d)</span></a>',
+			esc_url(
+				add_query_arg(
+					array(
+						'post_type'                         => 'post',
+						HERO_COLOR_PICKER_HAS_BG_QUERY_VAR => '1',
+					),
+					admin_url( 'edit.php' )
+				)
+			),
+			$is_current ? ' class="current" aria-current="page"' : '',
+			esc_html__( 'Hero Background', 'hero-color-picker' ),
+			(int) $count_query->found_posts
+		);
+
+		return $views;
+	}
+);
+
+/**
+ * Posts list: apply the hero background filter when custom view is active.
+ */
+add_action(
+	'pre_get_posts',
+	function ( $query ) {
+		if ( ! is_admin() || ! $query->is_main_query() ) {
+			return;
+		}
+
+		$post_type = $query->get( 'post_type' );
+		if ( $post_type && 'post' !== $post_type ) {
+			return;
+		}
+
+		$has_bg_filter = isset( $_GET[ HERO_COLOR_PICKER_HAS_BG_QUERY_VAR ] ) ? sanitize_text_field( wp_unslash( $_GET[ HERO_COLOR_PICKER_HAS_BG_QUERY_VAR ] ) ) : '';
+		if ( '1' !== $has_bg_filter ) {
+			return;
+		}
+
+		$meta_query   = (array) $query->get( 'meta_query' );
+		$meta_query[] = array(
+			'key'     => HERO_COLOR_PICKER_META_KEY,
+			'value'   => '',
+			'compare' => '!=',
+		);
+
+		$query->set( 'meta_query', $meta_query );
+	}
+);
 
 /**
  * Register post meta so Gutenberg can read/write it via REST.
