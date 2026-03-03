@@ -315,10 +315,24 @@ function HeroColorPickerPanel() {
 							isDismissible={ false }
 							style={ { margin: '6px 0 0' } }
 						>
-							<strong>{ statusText }</strong>
-							{ contrastRatio !== null
-								? ` (${ contrastRatio.toFixed( 2 ) }:1)`
-								: '' }
+							<div
+								style={ {
+									display: 'flex',
+									justifyContent: 'space-between',
+									alignItems: 'baseline',
+									gap: 8,
+									width: '100%',
+								} }
+							>
+								<strong>{ statusText }</strong>
+								{ contrastRatio !== null ? (
+									<span>
+										{ '(' +
+											contrastRatio.toFixed( 2 ) +
+											':1)' }
+									</span>
+								) : null }
+							</div>
 						</Notice>
 						<p style={ { margin: '10px 0 0', color: '#50575e' } }>
 							{ __(
