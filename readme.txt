@@ -3,7 +3,7 @@ Contributors: MarcDK
 Tags: Gutenberg, Block Editor, Color Picker, Accessibility, WCAG
 Requires at least: 5.9
 Tested up to: 6.9
-Stable tag: 1.0.7
+Stable tag: 1.0.8
 Requires PHP: 7.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -53,6 +53,10 @@ Important template setup:
 5. Optional: open `Posts > All Posts` and click `Hero Background` to list posts with a custom hero background.
 
 == Changelog ==
+
+= 1.0.8 =
+* Bumped plugin version to `1.0.8`.
+* Added release note entry for `1.0.8`.
 
 = 1.0.7 =
 * Added `Hero Background` view on `Posts > All Posts` to list posts with a custom hero background color.
