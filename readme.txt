@@ -50,6 +50,10 @@ Important template setup:
 4. Select the target `Group` block and add the class `hero-colored` in `Additional CSS class(es)`.
 5. Optional: open `Posts > All Posts` and click `Hero Background` to list posts with a custom hero background.
 
+== Screenshots ==
+
+1. Hero Color Picker sidebar panel with background color, font color, live preview, and WCAG status.
+
 == Changelog ==
 
 = 1.0.8 =
