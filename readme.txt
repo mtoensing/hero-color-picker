@@ -32,12 +32,10 @@ Stored as post meta:
 
 Frontend output (only when values are set):
 
-```css
-.hero-colored {
-	background-color: $background;
-	color: $font;
-}
-```
+    .hero-colored {
+        background-color: $background;
+        color: $font;
+    }
 
 Important template setup:
 - Open your block theme template (for example `Single`) in the Site Editor.
