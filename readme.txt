@@ -3,17 +3,17 @@ Contributors: MarcDK
 Tags: Gutenberg, Block Editor, Color Picker, Accessibility, WCAG
 Requires at least: 5.9
 Tested up to: 6.9
-Stable tag: 1.0.13
+Stable tag: 1.0.14
 Requires PHP: 7.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://marc.tv/out/donate
 
-WordPress plugin for the block editor (Gutenberg) to set a hero color per post.
+Hero Color Picker adds per-post color selection in the editor sidebar for hero styling via CSS.
 
 == Description ==
 
-**Hero Color Picker** adds a focused design panel to the WordPress post editor for styling hero sections.
+**Hero Color Picker** adds per-post background and font color controls in the editor sidebar for hero styling via CSS on elements with the `hero-colored` class.
 
 Features:
 - Two color controls: `Background Color` and `Font Color`
@@ -64,6 +64,9 @@ Important template setup:
 1. Hero Color Picker sidebar panel with background color, font color, live preview, and WCAG status.
 
 == Changelog ==
+
+= 1.0.14 =
+* Refined the plugin description across plugin metadata and the WordPress.org readme.
 
 = 1.0.13 =
 * Updated the editor FAQ link to point directly to the relevant WordPress.org FAQ entry.

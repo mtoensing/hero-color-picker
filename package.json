@@ -1,7 +1,7 @@
 {
   "name": "hero-color-picker",
-  "version": "1.0.13",
-  "description": "Gutenberg document sidebar color picker for the Hero Color Picker background.",
+  "version": "1.0.14",
+  "description": "Adds per-post color selection in the editor sidebar for hero styling via CSS.",
   "main": "build/index.js",
   "license": "GPL-2.0-or-later",
   "scripts": {
