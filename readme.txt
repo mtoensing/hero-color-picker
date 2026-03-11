@@ -3,7 +3,7 @@ Contributors: MarcDK
 Tags: Gutenberg, Block Editor, Color Picker, Accessibility, WCAG
 Requires at least: 5.9
 Tested up to: 6.9
-Stable tag: 1.0.11
+Stable tag: 1.0.12
 Requires PHP: 7.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -50,11 +50,24 @@ Important template setup:
 4. Select the target `Group` block and add the class `hero-colored` in `Additional CSS class(es)`.
 5. Optional: open `Posts > All Posts` and click `Hero Background` to list posts with a custom hero background.
 
+== Frequently Asked Questions ==
+
+= How do I add the `hero-colored` CSS class in templates? =
+
+1. Go to `Appearance > Editor` and open the template you use for posts (for example `Single`).
+2. Select the block that should receive the hero styles (usually a wrapping `Group` block).
+3. Open block settings, expand `Advanced`, and enter `hero-colored` in `Additional CSS class(es)`.
+4. Save the template.
+
 == Screenshots ==
 
 1. Hero Color Picker sidebar panel with background color, font color, live preview, and WCAG status.
 
 == Changelog ==
+
+= 1.0.12 =
+* Added an editor FAQ link for frontend setup troubleshooting.
+* Expanded the WordPress.org FAQ with template setup instructions.
 
 = 1.0.11 =
 * Bumped plugin version to `1.0.11`.

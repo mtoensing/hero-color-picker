@@ -6,6 +6,7 @@ import {
 	Button,
 	ColorPicker,
 	Dropdown,
+	ExternalLink,
 	Notice,
 	PanelRow,
 } from '@wordpress/components';
@@ -14,6 +15,7 @@ import { useSelect, useDispatch } from '@wordpress/data';
 const BACKGROUND_META_KEY = 'hero_color_picker_hero_color';
 const FONT_META_KEY = 'hero_color_picker_font_color';
 const AAA_NORMAL_TEXT_MIN_CONTRAST = 7;
+const FAQ_URL = 'https://wordpress.org/plugins/hero-color-picker/';
 const { useEffect } = window.wp.element;
 
 function applyEditorPostSummaryColors( backgroundColor, textColor ) {
@@ -341,6 +343,21 @@ function HeroColorPickerPanel() {
 							) }
 						</p>
 					</BaseControl>
+
+					<Notice
+						status="info"
+						isDismissible={ false }
+						style={ { margin: '12px 0 0' } }
+					>
+						<p style={ { margin: 0 } }>
+							<ExternalLink href={ FAQ_URL }>
+								{ __(
+									'Colors not showing on frontend? Read the FAQ.',
+									'hero-color-picker'
+								) }
+							</ExternalLink>
+						</p>
+					</Notice>
 				</div>
 			</PanelRow>
 		</PluginDocumentSettingPanel>

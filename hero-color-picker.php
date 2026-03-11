@@ -3,7 +3,7 @@
  * Plugin Name:   Hero Color Picker
  * Plugin URI:    https://github.com/mtoensing/hero-color-picker
  * Description:   Adds a per-post color picker in the editor sidebar for hero styling.
- * Version:       1.0.11
+ * Version:       1.0.12
  * Author:        Marc Tönsing
  * Author URI:    https://toensing.com
  * Text Domain:   hero-color-picker
