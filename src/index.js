@@ -15,7 +15,8 @@ import { useSelect, useDispatch } from '@wordpress/data';
 const BACKGROUND_META_KEY = 'hero_color_picker_hero_color';
 const FONT_META_KEY = 'hero_color_picker_font_color';
 const AAA_NORMAL_TEXT_MIN_CONTRAST = 7;
-const FAQ_URL = 'https://wordpress.org/plugins/hero-color-picker/';
+const FAQ_URL =
+	'https://wordpress.org/plugins/hero-color-picker/#how%20do%20i%20add%20the%20%60hero-colored%60%20css%20class%20in%20templates%3F';
 const { useEffect } = window.wp.element;
 
 function applyEditorPostSummaryColors( backgroundColor, textColor ) {
