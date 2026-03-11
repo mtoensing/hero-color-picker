@@ -303,7 +303,7 @@ function HeroColorPickerPanel() {
 						</strong>
 						<p style={ { margin: '6px 0 0' } }>
 							{ __(
-								'This is how background and font color look together.',
+								'This is how the background and font colors look together.',
 								'hero-color-picker'
 							) }
 						</p>
