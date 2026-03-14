@@ -3,10 +3,11 @@
  * Plugin Name:   Hero Color Picker
  * Plugin URI:    https://github.com/mtoensing/hero-color-picker
  * Description:   Adds per-post color selection in the editor sidebar for hero styling via CSS.
- * Version:       1.0.15
+ * Version:       1.0.16
  * Author:        Marc Tönsing
  * Author URI:    https://toensing.com
  * Text Domain:   hero-color-picker
+ * Domain Path:   /languages
  * License: GPL   v2 or later
  * License URI:   http://www.gnu.org/licenses/gpl-2.0.html
  *
@@ -20,6 +21,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 const HERO_COLOR_PICKER_META_KEY = 'hero_color_picker_hero_color';
 const HERO_COLOR_PICKER_FONT_META_KEY = 'hero_color_picker_font_color';
 const HERO_COLOR_PICKER_HAS_BG_QUERY_VAR = 'hero_color_picker_has_bg';
+
+/**
+ * Register the plugin language path for local files and WordPress.org language packs.
+ */
+add_action(
+	'init',
+	function () {
+		load_plugin_textdomain(
+			'hero-color-picker',
+			false,
+			dirname( plugin_basename( __FILE__ ) ) . '/languages'
+		);
+	}
+);
 
 /**
  * Posts list: add a core-like view to show posts that have a hero background.
@@ -155,6 +170,11 @@ add_action(
 			$asset['dependencies'],
 			$asset['version'],
 			true
+		);
+
+		wp_set_script_translations(
+			'hero-color-picker-editor',
+			'hero-color-picker'
 		);
 	}
 );

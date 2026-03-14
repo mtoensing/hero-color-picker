@@ -248,7 +248,7 @@ function HeroColorPickerPanel() {
 	return (
 		<PluginDocumentSettingPanel
 			name="hero-color-picker"
-			title="Hero Color Picker"
+			title={ __( 'Hero Color Picker', 'hero-color-picker' ) }
 			className="hero-color"
 		>
 			<PanelRow>
