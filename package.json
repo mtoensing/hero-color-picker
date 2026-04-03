@@ -1,6 +1,6 @@
 {
   "name": "hero-color-picker",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "description": "Adds per-post color selection in the editor sidebar for hero styling via CSS.",
   "main": "build/index.js",
   "license": "GPL-2.0-or-later",

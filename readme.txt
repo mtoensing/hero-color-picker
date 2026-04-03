@@ -3,7 +3,7 @@ Contributors: MarcDK
 Tags: Gutenberg, Block Editor, Color Picker, Accessibility, WCAG
 Requires at least: 5.9
 Tested up to: 6.9
-Stable tag: 1.0.17
+Stable tag: 1.0.18
 Requires PHP: 7.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -64,6 +64,9 @@ Important template setup:
 1. Hero Color Picker sidebar panel with background color, font color, live preview, and WCAG status.
 
 == Changelog ==
+
+= 1.0.18 =
+* Remove the manual textdomain loading and rely on the modern WordPress default translation flow.
 
 = 1.0.17 =
 * Updated the WordPress.org icon assets.
