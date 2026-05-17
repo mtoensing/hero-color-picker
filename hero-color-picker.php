@@ -3,7 +3,7 @@
  * Plugin Name:   Hero Color Picker
  * Plugin URI:    https://github.com/mtoensing/hero-color-picker
  * Description:   Adds per-post color selection in the editor sidebar for hero styling via CSS.
- * Version:       1.0.19
+ * Version:       1.0.20
  * Author:        Marc Tönsing
  * Author URI:    https://toensing.com
  * Text Domain:   hero-color-picker
@@ -200,9 +200,21 @@ add_action(
 			);
 		}
 
-		printf(
-			'<style>.hero-colored {%s}</style>' . "\n",
+		$styles = sprintf(
+			'.hero-colored {%s}',
 			$declarations
+		);
+
+		if ( $font_color ) {
+			$styles .= sprintf(
+				'.hero-colored a, .hero-colored a:visited, .hero-colored a:hover, .hero-colored a:focus, .hero-colored a:active {color: %s;}',
+				esc_html( $font_color )
+			);
+		}
+
+		printf(
+			'<style>%s</style>' . "\n",
+			$styles
 		);
 	}
 );

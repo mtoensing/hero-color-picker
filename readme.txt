@@ -3,7 +3,7 @@ Contributors: MarcDK
 Tags: Gutenberg, Block Editor, Color Picker, Accessibility, WCAG
 Requires at least: 5.9
 Tested up to: 7.0
-Stable tag: 1.0.19
+Stable tag: 1.0.20
 Requires PHP: 7.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -37,6 +37,10 @@ Frontend output (only when values are set):
         color: $font;
     }
 
+    .hero-colored a {
+        color: $font;
+    }
+
 Important template setup:
 - Open your block theme template (for example `Single`) in the Site Editor.
 - Select the `Group` block that should receive the hero styles.
@@ -64,6 +68,9 @@ Important template setup:
 1. Hero Color Picker sidebar panel with background color, font color, live preview, and WCAG status.
 
 == Changelog ==
+= 1.0.20 =
+* Apply the selected hero font color to links inside `.hero-colored`, including common link states.
+
 = 1.0.19 =
 * Prepared release for WordPress 7.0 compatibility.
 
